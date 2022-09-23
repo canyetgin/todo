@@ -18,7 +18,7 @@ const createNewTask = (oldTask) => {
   )
   //
   const newTaskText = document.createElement('label')
-  newTaskText.classList.add('d-flex', 'align-items-center', 'w-100', 'h-100')
+  newTaskText.classList.add('d-flex', 'align-items-center', 'w-100', 'h-100','text-break')
   //
   const newElementCheckbox = document.createElement('input')
   newElementCheckbox.type = 'checkbox'
@@ -83,13 +83,12 @@ const createNewTask = (oldTask) => {
       newTaskText.classList.remove('text-decoration-line-through')
     }
   })
-  
 
   return
 }
 
 taskAdd.addEventListener('click', () => {
-  
+  createNewTask('')
 })
 
 newTaskValue.addEventListener('keypress', function (event) {
@@ -110,3 +109,21 @@ const storagedTasks = () => {
 }
 
 storagedTasks()
+
+const wrapper = document.querySelector('.wrapper'),
+  header = wrapper.querySelector('.wrapperHeader')
+function onDrag({ movementX, movementY }) {
+  let getStyle = window.getComputedStyle(wrapper)
+  let leftVal = parseInt(getStyle.left)
+  let topVal = parseInt(getStyle.top)
+  wrapper.style.left = `${leftVal + movementX}px`
+  wrapper.style.top = `${topVal + movementY}px`
+}
+header.addEventListener('mousedown', () => {
+  header.classList.add('active')
+  header.addEventListener('mousemove', onDrag)
+})
+document.addEventListener('mouseup', () => {
+  header.classList.remove('active')
+  header.removeEventListener('mousemove', onDrag)
+})
