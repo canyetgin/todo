@@ -1,3 +1,7 @@
+setTimeout(()=>{
+  document.querySelector('#loader').style.display = 'none'
+}, 6000)
+
 const taskList = document.querySelector('#taskList')
 const newTaskValue = document.querySelector('#newTaskValue')
 const taskAdd = document.querySelector('#addTask')
@@ -5,6 +9,7 @@ const taskAdd = document.querySelector('#addTask')
 let currentTaskCount = Object.keys.length
 
 const createNewTask = (oldTask) => {
+  currentTaskCount++
   const newTaskLine = document.createElement('ul')
   newTaskLine.id = currentTaskCount
   newTaskLine.classList.add('list-group', 'list-group-horizontal', 'd-flex')
@@ -18,7 +23,13 @@ const createNewTask = (oldTask) => {
   )
   //
   const newTaskText = document.createElement('label')
-  newTaskText.classList.add('d-flex', 'align-items-center', 'w-100', 'h-100','text-break')
+  newTaskText.classList.add(
+    'd-flex',
+    'align-items-center',
+    'w-100',
+    'h-100',
+    'text-break'
+  )
   //
   const newElementCheckbox = document.createElement('input')
   newElementCheckbox.type = 'checkbox'
@@ -45,7 +56,7 @@ const createNewTask = (oldTask) => {
   //
 
   //
-  currentTaskCount++
+
   if (oldTask) {
     newTaskText.textContent = oldTask
     newTaskText.prepend(newElementCheckbox)
@@ -126,4 +137,22 @@ header.addEventListener('mousedown', () => {
 document.addEventListener('mouseup', () => {
   header.classList.remove('active')
   header.removeEventListener('mousemove', onDrag)
+})
+
+const wrapper2 = document.querySelector('.wrapper2'),
+  header2 = wrapper2.querySelector('.wrapperHeader2')
+function onDrag2({ movementX, movementY }) {
+  let getStyle = window.getComputedStyle(wrapper2)
+  let leftVal = parseInt(getStyle.left)
+  let topVal = parseInt(getStyle.top)
+  wrapper2.style.left = `${leftVal + movementX}px`
+  wrapper2.style.top = `${topVal + movementY}px`
+}
+header2.addEventListener('mousedown', () => {
+  header2.classList.add('active')
+  header2.addEventListener('mousemove', onDrag2)
+})
+document.addEventListener('mouseup', () => {
+  header2.classList.remove('active')
+  header2.removeEventListener('mousemove', onDrag2)
 })
