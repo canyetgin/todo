@@ -1,6 +1,6 @@
 setTimeout(() => {
   document.querySelector('#loader').style.display = 'none'
-}, 6000)
+}, 2000)
 
 const taskList = document.querySelector('#taskList')
 const newTaskValue = document.querySelector('#newTaskValue')
@@ -157,6 +157,24 @@ document.addEventListener('mouseup', () => {
   header2.removeEventListener('mousemove', onDrag2)
 })
 
+const wrapper3 = document.querySelector('.wrapper3'),
+  header3 = wrapper3.querySelector('.wrapperHeader3')
+function onDrag3({ movementX, movementY }) {
+  let getStyle = window.getComputedStyle(wrapper3)
+  let leftVal = parseInt(getStyle.left)
+  let topVal = parseInt(getStyle.top)
+  wrapper3.style.left = `${leftVal + movementX}px`
+  wrapper3.style.top = `${topVal + movementY}px`
+}
+header3.addEventListener('mousedown', () => {
+  header3.classList.add('active')
+  header3.addEventListener('mousemove', onDrag3)
+})
+document.addEventListener('mouseup', () => {
+  header3.classList.remove('active')
+  header3.removeEventListener('mousemove', onDrag3)
+})
+
 // Select Every Count Container
 const countContainer = document.querySelectorAll('.count-digit')
 
@@ -169,7 +187,7 @@ const resetAction = document.getElementById('reset-timer')
 const timeoutAudio = document.getElementById('alarm_audio')
 
 // Default inital value of timer
-const defaultValue =  3*60
+const defaultValue = 3 * 60
 
 // variable to the time
 var countDownTime = defaultValue
@@ -248,3 +266,25 @@ const runCountDown = () => {
     countDownTime = defaultValue
   }
 }
+
+const changeSpace = document.querySelector('#changeSpace')
+
+const spaceBackground = document.querySelector('iframe')
+let currentSpace = -1
+changeSpace.addEventListener('click', () => {
+  document.querySelector('img').remove()
+  const workspaces = [
+    'https://www.youtube.com/embed/hyE4Z4QMpRk?autoplay=1&amp;mute=0&amp;controls=0&amp;start=12&amp;origin=https%3A%2F%2Flifeat.io&amp;playsinline=1&amp;showinfo=0&amp;rel=0&amp;iv_load_policy=3&amp;modestbranding=1&amp;enablejsapi=1&amp;widgetid=1',
+
+    'https://www.youtube.com/embed/n61ULEU7CO0?autoplay=1&amp;mute=0&amp;controls=0&amp;start=12&amp;origin=https%3A%2F%2Flifeat.io&amp;playsinline=1&amp;showinfo=0&amp;rel=0&amp;iv_load_policy=3&amp;modestbranding=1&amp;enablejsapi=1&amp;widgetid=1',
+
+    'https://www.youtube.com/embed/1fueZCTYkpA?autoplay=1&amp;mute=0&amp;controls=0&amp;start=12&amp;origin=https%3A%2F%2Flifeat.io&amp;playsinline=1&amp;showinfo=0&amp;rel=0&amp;iv_load_policy=3&amp;modestbranding=1&amp;enablejsapi=1&amp;widgetid=1',
+  ]
+
+  currentSpace++
+
+  if (currentSpace === 3) {
+    currentSpace = currentSpace - 3
+  }
+  spaceBackground.src = workspaces[currentSpace]
+})

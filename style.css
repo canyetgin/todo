@@ -47,7 +47,8 @@
   gap: 1rem;
 }
 .wrapper,
-.wrapper2 {
+.wrapper2,
+.wrapper3 {
   position: absolute;
 
   top: 0%;
@@ -59,7 +60,8 @@
   box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.06);
 }
 .wrapperHeader,
-.wrapperHeader2 {
+.wrapperHeader2,
+.wrapperHeader3 {
   font-size: 1rem;
 
   border-bottom: 1px solid #ccc;
